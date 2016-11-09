@@ -3,7 +3,7 @@ defmodule Brain.Neuron do
    The neuron is the heart of all brain activity. This module is designed to
    illustrate how these neurons can be modeled in Elixir using Agents.
    """
-   defstruct [bias: 1, inputs: nil, pid: nil, output: nil, weights: nil]
+   defstruct [bias: nil, inputs: nil, pid: nil, output: nil, weights: nil]
 
    @doc """
    Adds the given inputs to the appropriately labeled neuron. This can be called
@@ -17,6 +17,7 @@ defmodule Brain.Neuron do
      Agent.update(lable, fn(map) ->
        neuron =
         Map.put(map, :inputs, inputs)
+        |> Map.put(:bias, :rand.uniform())
         |> Map.put(:weights, 1..length(inputs)
         |> Enum.map(fn(_) -> :rand.uniform() end))
       new_output = Brain.Activations.calculate_output(activation, neuron)

@@ -35,7 +35,7 @@ defmodule Brain.Error do
     actual =
       Enum.map(errors_in_network, &:math.pow(&1, 2))
       |> Enum.sum
-    error = actual / length(errors_in_network)
+    actual / length(errors_in_network)
   end
 
   @doc """
@@ -47,6 +47,6 @@ defmodule Brain.Error do
     errors =
       Enum.map(errors_in_network, &:math.pow(&1, 2))
       |> Enum.sum
-    total_errors = errors / 2
+    errors / 2
   end
 end
